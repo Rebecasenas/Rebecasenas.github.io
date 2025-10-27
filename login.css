@@ -1,3 +1,4 @@
+/* ======= ESTILO GERAL ======= */
 body {
     font-family: Arial, sans-serif;
     background: #fff;
@@ -9,6 +10,7 @@ body {
     height: 100vh;
 }
 
+/* ======= CONTAINER PRINCIPAL ======= */
 .container {
     width: 350px;
     background: #fff;
@@ -19,16 +21,20 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* ======= LOGO ======= */
 .container img {
     width: 60px;
     margin-bottom: 10px;
+    user-select: none;
+    /* evita seleção acidental */
 }
 
+/* ======= TÍTULO ======= */
 h2 {
     margin-bottom: 20px;
 }
 
-/* Inputs e botão do login centralizados */
+/* ======= FORMULÁRIO DE LOGIN ======= */
 #login form {
     display: flex;
     flex-direction: column;
@@ -37,20 +43,28 @@ h2 {
 
 #login input {
     width: 80%;
-    /* não ocupa todo o card */
     max-width: 280px;
     padding: 10px;
     margin: 8px 0;
     border-radius: 6px;
     border: 1px solid #ccc;
     text-align: center;
-    /* texto digitado centralizado */
+    font-size: 15px;
+    background: #fafafa;
+    transition: 0.3s;
 }
 
+#login input:focus {
+    border-color: #032554ff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+/* ======= BOTÃO DE ENTRAR ======= */
 #login button {
     width: 80%;
     max-width: 280px;
-    background: #007bff;
+    background: #032554ff;
     border: none;
     padding: 10px;
     margin-top: 10px;
@@ -58,22 +72,43 @@ h2 {
     color: #fff;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
+    user-select: none;
+    /* evita seleção */
 }
 
 #login button:hover {
-    background: #0056b3;
+    background: #021b3d;
 }
 
+/* ======= TEXTO E LINKS ======= */
 p {
     margin-top: 10px;
     font-size: 14px;
+    color: #333;
 }
 
 a {
-    color: #007bff;
+    color: #032554ff;
     text-decoration: none;
+    user-select: none;
+    /* impede o fundo azul da seleção */
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+/* ======= RESPONSIVIDADE ======= */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    #login input,
+    #login button {
+        width: 100%;
+        max-width: none;
+    }
 }

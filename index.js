@@ -1,93 +1,65 @@
-// Lista de funcionários (armazenados em memória)
-let funcionarios = [];
+// Função para alternar entre abas
+function openTab(event, tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-buttons button');
 
-// Função para trocar de aba
-function openTab(evt, tabName) {
-    let tabcontent = document.getElementsByClassName("tab-content");
-    let tabbuttons = document.getElementsByClassName("tab-buttons")[0].children;
+    contents.forEach(c => c.classList.remove('active'));
+    buttons.forEach(b => b.classList.remove('active'));
 
-    for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].classList.remove("active");
-    }
-
-    for (let i = 0; i < tabbuttons.length; i++) {
-        tabbuttons[i].classList.remove("active");
-    }
-
-    document.getElementById(tabName).classList.add("active");
-    evt.currentTarget.classList.add("active");
+    document.getElementById(tabName).classList.add('active');
+    event.currentTarget.classList.add('active');
 }
 
-// ==========================
-// Cadastro de funcionários
-// ==========================
-const form = document.getElementById("formFuncionario");
-const tabela = document.getElementById("tabelaFuncionarios");
+// ----------------------------
+// CADASTRO DE FUNCIONÁRIOS
+// ----------------------------
+const formFuncionario = document.getElementById('formFuncionario');
+const tabelaFuncionarios = document.getElementById('tabelaFuncionarios');
 
-form.addEventListener("submit", function (e) {
+formFuncionario?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    // Pega os valores do formulário
-    const nome = document.getElementById("nome").value;
-    const cpf = document.getElementById("cpf").value;
-    const email = document.getElementById("email").value;
-    const endereco = document.getElementById("endereco").value;
-    const telefone = document.getElementById("telefone").value;
+    const nome = document.getElementById('nome').value;
+    const cpf = document.getElementById('cpf').value;
+    const email = document.getElementById('email').value;
+    const endereco = document.getElementById('endereco').value;
+    const telefone = document.getElementById('telefone').value;
 
-    // Cria objeto funcionário com senha padrão
-    const funcionario = {
-        nome,
-        cpf,
-        email,
-        endereco,
-        telefone,
-        senha: "Mudar@123"
-    };
+    const novaLinha = `<tr>
+    <td>${nome}</td>
+    <td>${cpf}</td>
+    <td>${email}</td>
+    <td>${endereco}</td>
+    <td>${telefone}</td>
+  </tr>`;
 
-    // Adiciona no array
-    funcionarios.push(funcionario);
-
-    // Cria uma nova linha na tabela
-    const row = tabela.insertRow();
-    row.innerHTML = `
-        <td>${nome}</td>
-        <td>${cpf}</td>
-        <td>${email}</td>
-        <td>${endereco}</td>
-        <td>${telefone}</td>
-    `;
-
-    // Limpa os campos
-    form.reset();
-
-    // Vai para a aba de listagem
-    document.querySelectorAll(".tab-buttons button")[2].click();
+    tabelaFuncionarios.innerHTML += novaLinha;
+    formFuncionario.reset();
 });
 
-// ==========================
-// Login de funcionário
-// ==========================
-const formLogin = document.querySelector("#login form");
+// ----------------------------
+// CADASTRO DE LIVROS
+// ----------------------------
+const formLivro = document.getElementById('formLivro');
+const tabelaLivros = document.getElementById('tabelaLivros');
 
-formLogin.addEventListener("submit", function (e) {
+formLivro?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const usuario = formLogin.querySelector("input[type='text']").value;
-    const senha = formLogin.querySelector("input[type='password']").value;
+    const titulo = document.getElementById('titulo').value;
+    const autor = document.getElementById('autor').value;
+    const editora = document.getElementById('editora').value;
+    const ano = document.getElementById('ano').value;
+    const isbn = document.getElementById('isbn').value;
 
-    // Verifica se existe funcionário com esse e-mail
-    const funcionario = funcionarios.find(f => f.email === usuario);
+    const novaLinha = `<tr>
+    <td>${titulo}</td>
+    <td>${autor}</td>
+    <td>${editora}</td>
+    <td>${ano}</td>
+    <td>${isbn}</td>
+  </tr>`;
 
-    if (!funcionario) {
-        alert("Usuário não encontrado!");
-        return;
-    }
-
-    // Verifica a senha
-    if (funcionario.senha !== senha) {
-        alert("Senha incorreta!");
-        return;
-    }
-
-    alert(`Bem-vindo, ${funcionario.nome}!`);
+    tabelaLivros.innerHTML += novaLinha;
+    formLivro.reset();
 });
