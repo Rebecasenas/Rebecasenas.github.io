@@ -1,178 +1,197 @@
 /* ===============================
-   🌐 ESTILO GERAL DO SISTEMA
+   GERAL
    =============================== */
-html {
-    font-size: 100%;
-    scroll-behavior: smooth;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial, sans-serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f8f9fa;
-    margin: 0;
-    padding: 0;
+    background-color: #f9fafc;
+    color: #000;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    padding-top: 4vh;
-    overflow-x: hidden;
+    padding: 2rem 1rem;
 }
 
 /* ===============================
-   🧭 ABAS DE NAVEGAÇÃO
+   ÁREA DAS ABAS
    =============================== */
 .tabs {
-    width: 80%;
-    max-width: 60rem;
-    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+/* ===============================
+   BOTÕES DAS ABAS
+   =============================== */
 .tab-buttons {
     display: flex;
     justify-content: space-around;
-    background: #e9ecef;
-    border-radius: 0.5rem 0.5rem 0 0;
-    overflow: hidden;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
-    flex-wrap: wrap;
+    background-color: #d9d9d9;
 }
 
 .tab-buttons button {
     flex: 1;
-    padding: 1rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
+    background: transparent;
     border: none;
-    background: #e9ecef;
-    color: #000;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    user-select: none;
 }
 
 .tab-buttons button:hover {
-    background: #dee2e6;
+    background-color: #001f4d;
+    color: #fff;
 }
 
-.tab-buttons .active {
-    background: #032554ff;
+.tab-buttons button.active {
+    background-color: #001f4d;
     color: #fff;
 }
 
 /* ===============================
-   📦 CONTEÚDO DAS ABAS
+   CONTEÚDO DAS ABAS
    =============================== */
 .tab-content {
     display: none;
-    background: #fff;
-    padding: 2.5rem;
-    border-radius: 0 0 0.75rem 0.75rem;
-    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-    margin-top: 0;
+    padding: 2rem 1rem;
+    text-align: center;
 }
 
 .tab-content.active {
     display: block;
 }
 
-.container,
-.form-box {
-    text-align: center;
-    margin: auto;
-    max-width: 420px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
 /* ===============================
-   📚 LOGO
+   LOGO E TÍTULO
    =============================== */
-.logo-livros,
-.container img {
-    width: clamp(120px, 25vw, 220px);
+.logo-livros {
+    width: clamp(200px, 30vw, 400px);
+    /* bem maior, mantém responsividade */
     height: auto;
-    display: block;
-    margin: 0 auto 1.5rem auto;
+    margin-bottom: 0.5rem;
     user-select: none;
 }
 
-/* ===============================
-   🧾 TÍTULOS
-   =============================== */
 h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
-    font-size: clamp(1.8rem, 3vw, 2.2rem);
-    font-weight: bold;
-    color: #021b3d;
 }
 
 /* ===============================
-   🔐 FORMULÁRIOS (Login, Cadastro, Livros)
+   CAIXAS (CONTAINER / FORM-BOX) - AUMENTADAS
+   =============================== */
+.container,
+.form-box {
+    width: clamp(350px, 60%, 700px);
+    /* largura maior e responsiva */
+    padding: 2rem;
+    /* aumenta o espaço interno */
+    margin: 2rem auto;
+    /* centraliza horizontalmente e dá espaço vertical */
+    background-color: #fff;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* ===============================
+   LISTAGEM MAIS ESPAÇADA
+   =============================== */
+#listagem .container {
+    width: clamp(400px, 70%, 800px);
+    /* aumenta largura da listagem */
+    padding: 2.5rem;
+    margin: 2rem auto;
+}
+
+#listagem table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    table-layout: auto;
+    /* colunas ajustam ao conteúdo */
+}
+
+#listagem th,
+#listagem td {
+    padding: 1rem;
+    /* aumenta espaçamento nas células */
+}
+
+/* ===============================
+   FORMULÁRIOS
    =============================== */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    width: 100%;
 }
 
 input {
     width: 90%;
-    max-width: 320px;
-    padding: 12px;
+    max-width: 400px;
+    padding: 0.9rem;
+    margin-bottom: 1rem;
+    border: 1px solid #001f4d;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    text-align: center;
     font-size: 1rem;
-    background: #fafafa;
-    transition: 0.3s;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: all 0.3s;
 }
 
 input:focus {
-    border-color: #032554ff;
-    box-shadow: 0 0 6px rgba(3, 37, 84, 0.3);
+    border-color: #001f4d;
+    box-shadow: 0 0 5px rgba(0, 31, 77, 0.3);
     outline: none;
 }
 
 /* ===============================
-   🔘 BOTÕES
+   BOTÕES
    =============================== */
-button {
+button[type="submit"] {
     width: 90%;
-    max-width: 320px;
-    background: #032554ff;
+    max-width: 400px;
+    padding: 0.9rem;
     border: none;
-    padding: 12px;
-    margin-top: 10px;
     border-radius: 8px;
+    background-color: #001f4d;
     color: #fff;
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
-    user-select: none;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background: #021b3d;
+button[type="submit"]:hover {
+    background-color: #011a3e;
 }
 
 /* ===============================
-   🔗 TEXTOS E LINKS
+   LINKS E TEXTOS
    =============================== */
 p {
-    margin-top: 1rem;
     font-size: 0.95rem;
-    color: #333;
+    margin-top: 1rem;
 }
 
 a {
-    color: #032554ff;
+    color: #001f4d;
     text-decoration: none;
-    user-select: none;
+    font-weight: 500;
 }
 
 a:hover {
@@ -180,7 +199,7 @@ a:hover {
 }
 
 /* ===============================
-   📋 TABELAS (Listagem)
+   TABELA (LISTAGEM)
    =============================== */
 table {
     width: 100%;
@@ -188,87 +207,45 @@ table {
     margin-top: 1.5rem;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 0.75rem;
-    text-align: center;
-    font-size: clamp(0.8rem, 1vw, 1rem);
-}
-
-th {
-    background-color: #032554ff;
+thead {
+    background-color: #001f4d;
     color: #fff;
 }
 
+th,
+td {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+td {
+    font-size: 0.95rem;
+}
+
 /* ===============================
-   📱 RESPONSIVIDADE
+   RESPONSIVIDADE
    =============================== */
 @media (max-width: 768px) {
-    .tabs {
-        width: 95%;
-    }
-
-    .tab-buttons {
-        flex-direction: column;
-    }
-
     .tab-buttons button {
         font-size: 1rem;
-        padding: 0.9rem;
-    }
-
-    .tab-content {
-        padding: 1.5rem;
+        padding: 0.7rem;
     }
 
     input,
-    button {
-        max-width: 100%;
-    }
-
-    .container img {
-        width: clamp(140px, 40vw, 200px);
-    }
-}
-
-/* Telas grandes (Full HD e superiores) */
-@media (min-width: 1600px) {
-    .tabs {
-        max-width: 70rem;
-    }
-
-    .container {
-        max-width: 480px;
-        padding: 2.5rem;
+    button[type="submit"] {
+        width: 95%;
     }
 
     h2 {
-        font-size: 2.4rem;
+        font-size: 1.5rem;
     }
 
-    .container img {
-        width: 260px;
-    }
-}
-
-/* QHD e 4K */
-@media (min-width: 2560px) {
-    html {
-        font-size: 120%;
-    }
-
-    .tabs {
-        max-width: 80rem;
-    }
-}
-
-@media (min-width: 3840px) {
-    html {
-        font-size: 140%;
-    }
-
-    .tabs {
-        max-width: 100rem;
+    /* Ajuste das caixas em telas pequenas */
+    .container,
+    .form-box {
+        width: 90%;
+        padding: 1.5rem;
+        margin: 1.5rem auto;
     }
 }
