@@ -59,7 +59,9 @@ formLivro?.addEventListener('submit', (e) => {
     <td>${ano}</td>
     <td>${isbn}</td>
   </tr>`;
-
+    //
     tabelaLivros.innerHTML += novaLinha;
     formLivro.reset();
 });
+
+
