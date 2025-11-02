@@ -2,115 +2,197 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bibliotech - Sistema</title>
-
-  <!-- Estilo unificado -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Script -->
+  <link rel="stylesheet" href="index.css" />
   <script src="index.js" defer></script>
 </head>
 
 <body>
-  <div class="tabs">
-    <!-- 🔘 Navegação entre abas -->
-    <div class="tab-buttons">
-      <button class="active" onclick="openTab(event, 'login')">Login</button>
-      <button onclick="openTab(event, 'cadastro')">Cadastro</button>
-      <button onclick="openTab(event, 'listagem')">Listagem</button>
-      <button onclick="openTab(event, 'livros')">Livros</button>
-    </div>
+  <header class="header-logo">
+    <img src="logo-bibliotech.jpeg" alt="Logo Bibliotech" class="logo-header" />
+  </header>
 
-    <!-- ===============================
-         🟦 Aba Login
-    =============================== -->
-    <div id="login" class="tab-content active">
-      <div class="container">
-        <img src="logo-bibliotech1.png" alt="Logo Bibliotech" class="logo-livros" />
-        <h2>Login</h2>
+  <main class="tabs-wrapper">
+    <!-- barra principal -->
+    <nav class="tab-buttons" role="tablist" aria-label="Main tabs">
+      <button class="tab-btn active" data-tab="login" id="tab-login-btn">Login</button>
 
-        <form id="formLogin">
-          <input type="text" id="usuario" placeholder="Usuário" required />
-          <input type="password" id="senha" placeholder="Senha" required />
-          <button type="submit">Entrar</button>
-        </form>
-
-        <p>
-          Não possui cadastro?
-          <a href="#" onclick="openTab(event, 'cadastro')">Crie sua conta</a>
-        </p>
+      <div class="dropdown-menu" data-target-tab="cadastro">
+        <button class="tab-btn" data-tab="cadastro" id="tab-cadastro-btn">Cadastro</button>
+        <div class="dropdown-content">
+          <button class="sub-btn" data-sub="funcionarios">Funcionário</button>
+          <button class="sub-btn" data-sub="livros">Livros</button>
+          <button class="sub-btn" data-sub="alugueis">Aluguel</button>
+        </div>
       </div>
-    </div>
 
-    <!-- ===============================
-         🟩 Aba Cadastro de Funcionário
-    =============================== -->
-    <div id="cadastro" class="tab-content">
-      <div class="form-box">
-        <img src="logo-bibliotech1.png" alt="Logo Bibliotech" class="logo-livros" />
-        <h2>Cadastro de Funcionário</h2>
-
-        <form id="formFuncionario">
-          <input type="text" id="nome" placeholder="Nome Completo" required />
-          <input type="text" id="cpf" placeholder="CPF" required />
-          <input type="email" id="email" placeholder="E-mail" required />
-          <input type="text" id="endereco" placeholder="Endereço" required />
-          <input type="tel" id="telefone" placeholder="Telefone" required />
-          <button type="submit">Criar Conta</button>
-        </form>
-
-        <p>
-          Já possui uma conta?
-          <a href="#" onclick="openTab(event, 'login')">Faça login</a>
-        </p>
+      <div class="dropdown-menu" data-target-tab="listagem">
+        <button class="tab-btn" data-tab="listagem" id="tab-listagem-btn">Listagem</button>
+        <div class="dropdown-content">
+          <button class="sub-btn" data-list="funcList">Funcionário</button>
+          <button class="sub-btn" data-list="livroList">Livros</button>
+          <button class="sub-btn" data-list="aluguelList">Aluguel</button>
+        </div>
       </div>
-    </div>
+    </nav>
 
-    <!-- ===============================
-         🟨 Aba Listagem de Funcionários
-    =============================== -->
-    <div id="listagem" class="tab-content">
-      <div class="container">
-        <img src="logo-bibliotech1.png" alt="Logo Bibliotech" class="logo-livros" />
-        <h2>Listagem de Funcionários</h2>
+    <!-- conteudos (card-like) -->
+    <section class="tab-contents">
+      <!-- LOGIN -->
+      <article id="login" class="tab-content active" aria-labelledby="tab-login">
+        <div class="content-inner small">
+          <div class="centered-header">
+            <img src="icon-user.png" class="icon-large" alt="ícone login" />
+            <h2>Login</h2>
+          </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>CPF</th>
-              <th>E-mail</th>
-              <th>Endereço</th>
-              <th>Telefone</th>
-            </tr>
-          </thead>
-          <tbody id="tabelaFuncionarios">
-            <!-- Funcionários adicionados via JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
+          <div class="form-area">
+            <form class="login-form" id="loginForm">
+              <div class="input-group">
+                <span class="input-icon">
+                  <img src="icon-user.png" alt="usuário" />
+                </span>
+                <input type="text" id="loginUser" placeholder="LOGIN" />
+              </div>
 
-    <!-- ===============================
-         🟥 Aba Cadastro de Livros
-    =============================== -->
-    <div id="livros" class="tab-content">
-      <div class="form-box">
-        <img src="logo-bibliotech1.png" alt="Logo Bibliotech" class="logo-livros" />
-        <h2>Cadastro de Livros</h2>
+              <div class="input-group">
+                <span class="input-icon">
+                  <img src="icon-lock.png" alt="senha" />
+                </span>
+                <input type="password" id="loginPass" placeholder="SENHA" />
+              </div>
 
-        <form id="formLivro">
-          <input type="text" id="titulo" placeholder="Título do Livro" required />
-          <input type="text" id="autor" placeholder="Autor" required />
-          <input type="text" id="editora" placeholder="Editora" required />
-          <input type="number" id="ano" placeholder="Ano de Publicação" required />
-          <button type="submit">Cadastrar Livro</button>
-        </form>
-      </div>
-    </div>
-  </div>
+              <div class="form-actions">
+                <button class="btn-primary" type="submit">Entrar</button>
+              </div>
+
+              <div class="signup-link">
+                Não possui cadastro?
+                <a href="#" onclick="openTabFromJs('cadastro')">Crie uma conta</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <!-- CADASTRO -->
+      <article id="cadastro" class="tab-content" aria-labelledby="tab-cadastro">
+        <div class="content-inner">
+
+          <div class="centered-header">
+            <img id="cadastroIcon" src="icon-cadastro.png" class="icon-large" alt="ícone cadastro" />
+            <h2 id="cadastroTitle">Cadastro</h2>
+          </div>
+
+          <!-- SUB: Funcionários -->
+          <div id="sub-funcionarios" class="sub-content active">
+            <form id="formFuncionario" class="form-area">
+              <input type="text" id="nome" placeholder="NOME COMPLETO" required />
+              <input type="text" id="cpf" placeholder="CPF" required />
+              <input type="email" id="email" placeholder="E-MAIL" required />
+              <input type="text" id="endereco" placeholder="ENDEREÇO" required />
+              <input type="tel" id="telefone" placeholder="TELEFONE" required />
+              <div class="form-actions">
+                <button class="btn-submit" type="submit">Criar Conta</button>
+              </div>
+              <div class="login-link">
+                Já possui uma conta? <a href="#" onclick="openTabFromJs('login')">Faça login</a>
+              </div>
+            </form>
+          </div>
+
+          <!-- SUB: Livros -->
+          <div id="sub-livros" class="sub-content" style="display:none;">
+            <form id="formLivro" class="form-area">
+              <input type="text" id="titulo" placeholder="TÍTULO" required />
+              <input type="text" id="editora" placeholder="EDITORA" required />
+              <input type="text" id="autor" placeholder="AUTOR" required />
+              <input type="text" id="genero" placeholder="GÊNERO" />
+              <input type="text" id="ano" placeholder="ANO DE PUBLICAÇÃO" />
+              <div class="form-actions">
+                <button class="btn-submit" type="submit">Cadastrar Livro</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- SUB: Aluguéis -->
+          <div id="sub-alugueis" class="sub-content" style="display:none;">
+            <form id="formAluguel" class="form-area">
+              <input type="email" id="aluguelEmail" placeholder="E-MAIL CORPORATIVO" />
+              <select id="aluguelLivro" aria-label="Selecione livro">
+                <option value="">SELECIONE UM LIVRO</option>
+              </select>
+              <div class="form-actions">
+                <button class="btn-submit" type="submit">Solicitar Aluguel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <!-- LISTAGEM -->
+      <article id="listagem" class="tab-content" aria-labelledby="tab-listagem">
+        <div class="content-inner">
+          <div class="centered-header">
+            <img id="listagemIcon" src="icon-list-novo.png" class="icon-large" alt="ícone listagem" />
+            <h2 id="listagemTitle">Listagem de Funcionários</h2>
+          </div>
+
+          <!-- Funcionários -->
+          <div id="funcList" class="list-block active">
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>CPF</th>
+                  <th>E-mail</th>
+                  <th>Endereço</th>
+                  <th>Telefone</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaFuncionarios">
+                <!-- preenchido por JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Livros -->
+          <div id="livroList" class="list-block" style="display:none;">
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Editora</th>
+                  <th>Autor</th>
+                  <th>Gênero</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaLivros"></tbody>
+            </table>
+          </div>
+
+          <!-- Aluguéis -->
+          <div id="aluguelList" class="list-block" style="display:none;">
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Título</th>
+                  <th>Data Prevista Entrega</th>
+                  <th>Data Entrega</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaAlugueis"></tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>

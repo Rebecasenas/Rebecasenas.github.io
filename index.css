@@ -1,245 +1,364 @@
-/* ======= ESTILO GERAL ======= */
-html {
-    font-size: 100%;
-    /* Base de 16px (1rem = 16px) */
-    scroll-behavior: smooth;
+/* responsive-styles.css
+   Versão adaptada para responder bem a: 1920×1080 (Full HD), 2560×1440 (QHD) e 3840×2160 (4K UHD)
+   Mantive sua estrutura original e apliquei ajustes baseados em variáveis, clamp e breakpoints
+*/
+
+:root{
+  /* breakpoints úteis */
+  --bp-sm: 700px;   /* tablets / small */
+  --bp-md: 1100px;  /* medium */
+  --bp-lg: 1600px;  /* large / FullHD start */
+  --bp-qhd: 2560px; /* QHD */
+  --bp-4k: 3840px;  /* 4K */
+
+  /* escala base para fontes / espaçamentos (ajustável) */
+  --scale-small: 0.9; 
+  --scale-base: 1;
+  --scale-large: 1.08;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f9fa;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding-top: 4vh;
-    overflow-x: hidden;
+/* ====== BASE ====== */
+* { box-sizing: border-box; }
+html, body { height:100%; }
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #0b2133;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: clamp(18px, 1.2vw, 60px) 20px; /* escala automática */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.35;
 }
 
-/* ======= ÁREA PRINCIPAL ======= */
-.tabs {
-    width: 80%;
-    max-width: 60rem;
-    /* ~960px */
-    text-align: center;
+/* LOGO */
+.header-logo{
+  width:100%;
+  text-align:center;
+  margin-bottom: clamp(12px, 1.2vw, 36px);
+}
+.logo-header{
+  width: clamp(200px, 18vw, 520px); /* escala mais controlada */
+  height:auto;
+  display:inline-block;
 }
 
-/* ======= BOTÕES DAS ABAS ======= */
-.tab-buttons {
-    display: flex;
-    justify-content: space-around;
-    background: #e9ecef;
-    border-radius: 0.5rem 0.5rem 0 0;
-    overflow: hidden;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
-    flex-wrap: wrap;
+/* TABS WRAPPER */
+.tabs-wrapper{
+  width:100%;
+  max-width:1300px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0;
 }
 
-.tab-buttons button {
-    flex: 1;
-    padding: 1rem 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    background: #e9ecef;
-    color: #000;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
+/* BARRA PRINCIPAL */
+.tab-buttons{
+  width:86%;
+  max-width:1200px;
+  display:flex;
+  background:#e6e6e6;
+  border-radius:6px 6px 0 0;
+  overflow:hidden;
+  box-shadow: 0 10px 30px rgba(3,23,55,0.06);
+  margin-bottom:0;
+}
+.tab-btn{
+  flex:1;
+  padding: clamp(12px, 1.2vw, 28px) 12px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  text-align:center;
+  font-weight:600;
+  color:#111;
+  font-size: clamp(1rem, 1.6vw, 1.6rem);
+}
+.tab-btn.active{
+  background:#072548;
+  color:#fff;
 }
 
-.tab-buttons button:hover {
-    background: #dee2e6;
+/* CONTENT (card-like) */
+.tab-contents{
+  width:86%;
+  max-width:1200px;
+  display:flex;
+  justify-content:center;
+}
+.tab-content{
+  width:100%;
+  display:none;
+  background:#fff;
+  border-radius:0 0 12px 12px;
+  box-shadow: 0 16px 48px rgba(3,23,55,0.06);
+  padding: clamp(20px, 2.2vw, 64px);
+  transition: padding 0.18s ease, box-shadow 0.18s ease;
+}
+.tab-content.active{ display:block; }
+
+/* content inner */
+.content-inner{ width:100%; }
+
+/* content top row (left spacer + secondary menu right) */
+.content-top-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom: clamp(10px, 1vw, 20px);
+}
+.content-left-spacer{ flex:1; }
+.secondary-menu{ display:flex; gap:8px; align-items:center; }
+.sec-btn{
+  padding:8px 14px;
+  border-radius:4px;
+  border:0;
+  background: #dfdfdf;
+  color:#072548;
+  cursor:pointer;
+  font-weight:600;
+  font-size: clamp(0.85rem, 0.9vw, 1rem);
+}
+.sec-btn.active{ background:#072548; color:#fff; }
+
+/* centered header (ícone e título) */
+.centered-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:clamp(6px, 0.6vw, 18px);
+  margin: 8px 0 18px;
 }
 
-.tab-buttons .active {
-    background: #032554ff;
-    color: #fff;
+/* Ícones (garante proporção e responsividade) */
+.icon-large {
+  width: clamp(56px, 4.2vw, 120px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  max-height: 220px;
+}
+#login .icon-large{ width: clamp(56px, 3.2vw, 84px); }
+#cadastro .icon-large{ width: clamp(48px, 4.8vw, 96px); }
+
+/* titles */
+.centered-header h2{
+  margin:0;
+  font-size: clamp(1.25rem, 1.6vw, 2.4rem);
+  color:#0b2133;
+  text-align:center;
 }
 
-/* ======= CONTEÚDO DAS ABAS ======= */
-.tab-content {
-    display: none;
-    background: #fff;
-    padding: 2.5rem;
-    border-radius: 0 0 0.75rem 0.75rem;
-    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
-    margin-top: 0;
+/* form area */
+.form-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top:8px;
+}
+.form-area form, .login-form {
+  width:100%;
+  max-width:720px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
+}
+.input-group, .form-area input, .form-area select { width:100%; }
+.input-group { position:relative; width:100%; max-width:520px; }
+.input-icon {
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+  opacity:0.95;
+}
+.input-icon img{ width:18px; height:18px; display:block; }
+
+/* fields */
+.login-form input[type="text"],
+.login-form input[type="password"],
+.form-area input[type="text"],
+.form-area input[type="email"],
+.form-area input[type="tel"],
+.form-area input[type="number"],
+.form-area input[type="date"],
+.form-area select{
+  width:100%;
+  padding:12px 16px 12px 46px;
+  border-radius:6px;
+  border:1.5px solid #0b3158;
+  font-size: clamp(0.85rem, 0.95vw, 1.05rem);
+  color:#072548;
+  background:#fff;
+  text-transform:uppercase;
+  outline:none;
+}
+.form-area select{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  background-image: linear-gradient(45deg, transparent 50%, #072548 50%), linear-gradient(135deg, #072548 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+  background-size: 8px 8px, 8px 8px;
+  background-repeat: no-repeat;
+  padding-right:46px;
+}
+.form-area input::placeholder{ color:#72839a; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.6px; }
+.form-area input:focus,
+.login-form input:focus,
+.form-area select:focus{
+  box-shadow:0 12px 30px rgba(7,37,72,0.06);
+  outline:none;
 }
 
-.tab-content.active {
-    display: block;
+/* buttons */
+.form-actions{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+  width:100%;
+}
+.btn-primary, .btn-submit{
+  width:46%;
+  max-width:420px;
+  background:#072548;
+  color:#fff;
+  border:0;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow: 0 8px 18px rgba(7,37,72,0.06);
+  transition: transform 0.12s ease;
+}
+.btn-primary:hover, .btn-submit:hover{ transform:translateY(-3px); }
+
+/* list tables */
+.list-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:18px;
+}
+.list-table thead th{
+  background:#072548;
+  color:#fff;
+  padding:14px 12px;
+  text-align:left;
+  font-weight:600;
+  font-size:clamp(0.95rem, 1.1vw, 1.2rem);
+}
+.list-table tbody td{
+  padding:18px 12px;
+  font-size:clamp(0.95rem, 1vw, 1.12rem);
+  color:#111;
+  border-bottom: none;
 }
 
-/* ======= CONTAINER ======= */
-.container,
-.form-box {
-    text-align: center;
-    margin: auto;
-    max-width: 37.5rem;
-    /* 600px */
+/* login links */
+.login-link, .signup-link{
+  margin-top:12px;
+  font-size:clamp(0.84rem, 0.9vw, 0.98rem);
+  color:#0b2133;
+  text-align:center;
+}
+.login-link a, .signup-link a{
+  color:#072548;
+  text-decoration:underline;
+  font-weight:600;
 }
 
-/* ======= LOGO ======= */
-.logo-livros,
-.tab-content img {
-    width: clamp(8rem, 20vw, 12.5rem);
-    height: auto;
-    display: block;
-    margin: 0 auto 1.5rem auto;
-    border-radius: 0.5rem;
-    user-select: none;
+/* Dropdown Menu */
+.tab-buttons{ overflow: visible; z-index:100; }
+.dropdown-menu { position: relative; flex: 1; display: flex; }
+.dropdown-menu > .tab-btn { width: 100%; }
+.dropdown-content {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 90;
+  display: flex; flex-direction: column; background: #072548; border-radius: 0 0 6px 6px;
+  max-height: 0; opacity: 0; padding: 0; overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+.dropdown-menu:hover .dropdown-content { max-height: 250px; opacity: 1; padding: 6px 0; }
+.dropdown-content .sub-btn { border: none; background: transparent; color: #fff; padding: 10px 12px; text-align: left; font-size: 1.1rem; cursor: pointer; transition: background 0.2s; }
+.dropdown-content .sub-btn.active, .dropdown-content .sub-btn:hover { background: #0b3158; }
+
+/* show centered header only on active tab */
+.tab-content .centered-header { display:none !important; }
+.tab-content.active .centered-header { display:flex !important; }
+
+/* ---------------------------
+   Breakpoints focados nas resoluções solicitadas
+   --------------------------- */
+
+/* pequenos: <= 1100 (mantive suas regras existentes) */
+@media (max-width: 1100px){
+  .tab-buttons, .tab-contents { width:92%; max-width:980px; }
+  .logo-header { width: clamp(200px, 40vw, 520px); }
+  .form-area form { max-width:720px; }
+  .sec-btn { padding:7px 12px; font-size:0.92rem; }
+  .tab-btn{font-size:1.2rem; padding:16px;}
+}
+@media (max-width:700px){
+  body { padding:18px 12px; }
+  .tab-buttons, .tab-contents { width:96%; }
+  .tab-btn { font-size:1rem; padding:12px 8px; }
+  .centered-header { gap:6px; margin:8px 0 14px; }
+  .icon-large { width:56px; }
+  #cadastro .icon-large{ width: clamp(48px, 9vw, 56px); }
+  .form-area form { max-width: 100%; padding:0 12px; }
+  .btn-submit { width:70%; }
+  .secondary-menu { gap:6px; }
+  .content-top-row { flex-direction:column-reverse; align-items:flex-start; gap:8px; }
+  .content-left-spacer { display:none; }
+  .tab-content{ padding:20px; border-radius:10px;}
 }
 
-/* ======= TÍTULOS ======= */
-h2 {
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    color: #1e1e1e;
+/* Full HD — ajuste específico próximo a 1920px */
+@media (min-width: 1600px) and (max-width: 1999px){
+  body { padding: clamp(24px, 1.6vw, 40px); }
+  .tab-buttons { max-width: 1350px; width:84%; }
+  .tab-content { padding: clamp(32px, 2.4vw, 64px); }
+  .centered-header h2 { font-size: clamp(1.6rem, 1.9vw, 2rem); }
+  .icon-large { width: clamp(72px, 4.8vw, 96px); }
 }
 
-/* ======= FORMULÁRIOS ======= */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+/* QHD — 2560px ~ 2000-2999px */
+@media (min-width: 2000px) and (max-width: 2999px){
+  body { padding: clamp(36px, 1.8vw, 56px); }
+  .tab-buttons { max-width: 1600px; width:78%; }
+  .tab-content {
+    padding: clamp(40px, 2.6vw, 80px);
+    box-shadow: 0 22px 64px rgba(3,23,55,0.06);
+  }
+  .centered-header h2 { font-size: clamp(1.9rem, 2vw, 2.2rem); }
+  .icon-large { width: clamp(88px, 4.6vw, 110px); }
+  .logo-header { width: clamp(360px, 32vw, 960px); }
 }
 
-input {
-    width: 90%;
-    max-width: 31.25rem;
-    /* 500px */
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    text-align: center;
-    font-size: 1rem;
-    background: #fafafa;
-    transition: 0.3s;
+/* 4K and ultra-wide */
+@media (min-width: 3000px){
+  body { padding: clamp(48px, 1.5vw, 80px); }
+  .tabs-wrapper { max-width: 1800px; }
+  .tab-buttons { max-width: 1800px; width:72%; }
+  .tab-content {
+    padding: clamp(56px, 2.4vw, 120px);
+    box-shadow: 0 28px 88px rgba(3,23,55,0.07);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .logo-header { width: clamp(420px, 28vw, 1200px); }
+  .icon-large { width: clamp(110px, 5.5vw, 160px); }
+  .centered-header h2 { font-size: clamp(1.9rem, 2.2vw, 2.6rem); }
+  .tab-btn { font-size: clamp(1.3rem, 1.3vw, 2rem); padding: 26px 16px; }
 }
 
-input:focus {
-    border-color: #032554ff;
-    box-shadow: 0 0 0.4rem rgba(0, 123, 255, 0.3);
-    outline: none;
-}
+/* Proteção para cards não extrapolarem em telas muito largas */
+.tab-contents, .tab-buttons, .tabs-wrapper, .tab-content { margin-left: auto !important; margin-right: auto !important; }
 
-/* ======= BOTÕES ======= */
-button {
-    width: 90%;
-    max-width: 31.25rem;
-    background: #032554ff;
-    color: #fff;
-    font-size: 1.125rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.8rem;
-    cursor: pointer;
-    transition: 0.3s;
-    user-select: none;
-}
-
-button:hover {
-    background: #021b3d;
-}
-
-/* ======= TEXTOS E LINKS ======= */
-p {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: #333;
-}
-
-a {
-    color: #032554ff;
-    text-decoration: none;
-    user-select: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* ======= TABELA ======= */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.5rem;
-}
-
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 0.75rem;
-    text-align: center;
-    font-size: clamp(0.8rem, 1vw, 1rem);
-}
-
-th {
-    background-color: #032554ff;
-    color: #fff;
-}
-
-/* ======= RESPONSIVIDADE ======= */
-
-/* Telas pequenas (celulares e tablets) */
-@media (max-width: 768px) {
-    .tabs {
-        width: 95%;
-    }
-
-    .tab-buttons {
-        flex-direction: column;
-    }
-
-    .tab-buttons button {
-        font-size: 1rem;
-        padding: 0.9rem;
-    }
-
-    .tab-content {
-        padding: 1.5rem;
-    }
-
-    input,
-    button {
-        max-width: 100%;
-    }
-}
-
-/* Telas grandes (Full HD e superiores) */
-@media (min-width: 1920px) {
-    html {
-        font-size: 110%;
-    }
-
-    .tabs {
-        max-width: 70rem;
-    }
-}
-
-/* QHD (2560x1440) */
-@media (min-width: 2560px) {
-    html {
-        font-size: 120%;
-    }
-
-    .tabs {
-        max-width: 80rem;
-    }
-}
-
-/* 4K UHD (3840x2160) */
-@media (min-width: 3840px) {
-    html {
-        font-size: 140%;
-    }
-
-    .tabs {
-        max-width: 100rem;
-    }
-}
+/* FIM - ajustes principais */
