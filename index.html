@@ -67,11 +67,6 @@
               <div class="form-actions">
                 <button class="btn-primary" type="submit">Entrar</button>
               </div>
-
-              <div class="signup-link">
-                Não possui cadastro?
-                <a href="#" onclick="openTabFromJs('cadastro')">Crie uma conta</a>
-              </div>
             </form>
           </div>
         </div>
@@ -95,13 +90,11 @@
               <input type="text" id="endereco" placeholder="ENDEREÇO" required />
               <input type="tel" id="telefone" placeholder="TELEFONE" required />
               <div class="form-actions">
-                <button class="btn-submit" type="submit">Criar Conta</button>
-              </div>
-              <div class="login-link">
-                Já possui uma conta? <a href="#" onclick="openTabFromJs('login')">Faça login</a>
+              <button class="btn-submit" type="submit">Criar Conta</button>
               </div>
             </form>
-          </div>
+          </div>              
+         
 
           <!-- SUB: Livros -->
           <div id="sub-livros" class="sub-content" style="display:none;">
@@ -184,6 +177,7 @@
                   <th>Data Prevista Entrega</th>
                   <th>Data Entrega</th>
                   <th>Status</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody id="tabelaAlugueis"></tbody>
